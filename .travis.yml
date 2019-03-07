@@ -9,15 +9,14 @@ script:
   - docker run udaygdms/react-test npm run test -- --coverage
 
 after_success:
-  docker build -t udaygdms/multi-client ./client
-  docker build -t udaygdms/multi-nginx ./nginx
-  docker build -t udaygdms/multi-server ./server
-  docker build -t udaygdms/multi-worker ./worker
+  - docker build -t udaygdms/multi-client ./client
+  - docker build -t udaygdms/multi-nginx ./nginx
+  - docker build -t udaygdms/multi-server ./server
+  - docker build -t udaygdms/multi-worker ./worker
   # login to docker cli
-  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take these images and push to Docker hub
-  docker push udaygdms/multi-client
-  docker push udaygdms/multi-nginx
-  docker push udaygdms/multi-server
-  docker push udaygdms/multi-worker
-  
+  - docker push udaygdms/multi-client
+  - docker push udaygdms/multi-nginx
+  - docker push udaygdms/multi-server
+  - docker push udaygdms/multi-worker
